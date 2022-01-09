@@ -8,7 +8,7 @@ export default class App extends Component {
   state = { videos: [], selectedVideo: null };
 
   onTermSubmit = async (term) => {
-    const response = await youtube.get('/search',{
+    const response = await youtube.get('/search', {
       params: {
         q: term
       }
@@ -25,8 +25,17 @@ export default class App extends Component {
     return (
       <div className="ui container">
         <SearchBar onFormSubmit={this.onTermSubmit} />
-        <VideoDetail video={this.state.selectedVideo} />
-        <VideoList onVideoSelect={this.onVideoSelect} videos={this.state.videos} />
+        <div className="ui grid">
+          <div className="eleven wide column">
+            <VideoDetail video={this.state.selectedVideo} />
+          </div>
+          <div className="five wide column">
+            <VideoList
+              onVideoSelect={this.onVideoSelect}
+              videos={this.state.videos}
+            />
+          </div>
+        </div>
       </div>
     )
   }
